@@ -364,4 +364,80 @@ Decoupling what from when can dramaticaly improve both the throughput and struct
 
     ` If you do something a certain way, do all similar thing in the same way`
 
-- Artificial COupling
+- Artificial Coupling
+
+    ` Things that dont depend upon each other should not be artificially coupled`
+
+- Feature Envy
+
+    ` The methods of a class should be interested in the variables and functiones of the class they belong to, and not the variables and functions of other class`
+
+- Obscure Intent
+
+    ` We want code to be expressive as posible`
+
+- Misplacced Responsibility
+
+    ` Code should be placed where a reader would naturally expect it to be`
+
+- Use Explanatory Variables
+
+- Functions Names should say what they do
+
+- Prefer Polymorphism to If/else or Switch/Case
+
+- Follow Standard Conventions
+
+- Replace Magic Numbers with named constants
+
+- Be precise
+
+    ` When you make a decision in your code, make sure you make it precisely. Know why you have made it and how you will deal with any exceptions`
+
+- Encapsulate Conditionals
+
+    ` Boolean logic is hard enough to understand without having to see it in the context. Extract functions that explain the intent of the conditional.`
+
+- Avoid Negative Conditionals
+
+- Functions Should do one thing.
+
+- Don't be Arbitrary
+
+    ` Have a reason for the way you structure your code, and make sure that reason is communicated by the structure of the code. If a structure appears arbitrary, others will feel empowered to change it`
+
+- Functions should descend only one level of abstraction
+
+- Keep configurable data and high levels
+
+- Avoid transitive navigation
+
+    ` If A collaborates with B, and B collaborates with C, we dont want modules that use A to know about C (The Law of Demeter)`
+
+- Avoid long import list by using wildcards
+
+- Dont inherit constant
+
+- Constants versus enums
+
+- Choose descriptive names
+
+- Use standard nomeclature where possible
+
+- Unambiguous names
+
+- Use long names for long scopes
+
+- Avoid encodings
+
+- Names should describe side-effects
+
+- Insufficiente Tests
+
+- Use a coverage tool
+
+- Dont skip trivial tests
+
+- An Ignored test is a question about an ambiguity
+
+- Test should be fast
