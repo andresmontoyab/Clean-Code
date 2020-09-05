@@ -2,13 +2,17 @@
 
 In this repository is going to be summmary of the book `Clean Code by Robert C. Martin`, I really hope that this information help you to improve your programming skills.
 
+<div style="font-size:10px, padding-left:10%, padding-right:10%, inline: center">
+    <h1>`Refactoring or cleaning up our code is a lot like solving a Rubik's cube. There are lots of little steps required to achieve a large goal. Each step enables the next.`<h1>
+</div>
+
 * [Chapter 1 - Clean Code](#Chapter-1---Clean-Code)
 * [Chapter 2 - Meaninful Names](#Chapter-2---Meaningful-Names)
 * [Chapter 3 - Functions](#Chapter-3---Functions)
 * [Chapter 4 - Comments](#Chapter-4---Comments)
 * [Chapter 5 - Formating](#Chapter-5---Formating)
 * [Chapter 6 - Objects and Data Structures](#Chapter-6---Objects-and-Data-Structures)
-* [Chapter 7 - Error Handling](#Chapte-7---Error-Handling)
+* [Chapter 7 - Error Handling](#Chapter-7---Error-Handling)
 * [Chapter 8 - Boundaries](#Chapter-8---Boundaries)
 * [Chapter 9 - Unit Test](#Chapter-9---Unit-Test)
 * [Chapter 10 - Classes](#-Chapter-10---Classes)
@@ -247,3 +251,67 @@ Clean test follow five other rules.
  - We would like cohesion to be hight, when cohesion is high, it means that the methods and variables of the class are co-dependent and hang together as a whole.
 
  - When classes lose cohesion, split them.
+
+ ## Chapter 11 - Systems
+
+ Could you manage all the details yourself? Probably not. Even managing an existing city is too much for one person. Cities also also work because they have evolved apropiate levels of abstraction and modularity that make it posible for individuals and the "components" they manage to work effectively, even without understanding the big picture.
+
+ - Software system should separate the startup process, when the application objects are constructed and the dependencies are wired togethe, from the runtime ñpgic that takes over after startup.
+
+ - One way to separate construction from use is simply to move all aspects of construction to main, or modules called by main, and to design the rest of the system assuming that all objects have been constructed and wired up appropriately.
+
+- System need domain specific languages(DSL), a good DSL minimizes the communication gap between a domain concept and the code that implements it. If you're implementing domain logic in the same language that a domain uses, there is less risk that you will incorrectly translate the domain into the implementations.
+
+ ### Dependency Injection
+
+ - A powerful mechanism for separating construction from use is Dependency Injection(DI), the application of Inversion of Control (IoC) to dependency management. Inversion of control moves secondary responsibilities from an object to other objects that are dedicated to the purpose, thereby supporting the Single Responsibility principle.
+
+ - True dependency injection goes one step further. The class takes no direct steps to resolve its dependencies; It is completely passive instead, it provides setter methods or constructor arguments, that are used to inject the dependencies.
+
+ ## Chapter 12 - Emergence
+
+ A desing is simple if it follow these rules
+
+ ### Runs all the test
+
+ - A system that acts as intended. A system might have a perfect design on paper. But if there is no simple way to verify that the system actually works as intended, then all the paper effort is questionable.
+
+ - The fact that we have these test eliminates the fear that cleaning up the code will break it.
+
+ ### Contains no duplication
+
+ - Duplication is the primary enemy of a well-design system. It represents additional work, aditional risk, and aditional unnecessary complexity.
+
+ ### Expressive.
+
+ - It's easy to write code that we understand, because at the time we write it we're deep in an understanding of the problem we're trying to solve. Other mainteners of the code arent going to have so deep an understanding.
+
+ - The clearer the author can make the code, the less time others will have to spend understanding it. This will reduce defects and shrink the cost of maintenance.
+
+## Chapter 13 - Concurrency
+
+Objects are abstractions of processing. Thread are abstractions of schedule.
+
+Writing clean concurrent programs is hard- very hard. It is much easier to write code that executes in a single thread. It is also easier to write multithreaded code that looks fine on the surface but is broken at a deeper level.
+
+### Why Concurrency
+
+Concurrency is a decoupling strategy. It helps us decouple what gets done from when it gets done. In single thread application what and when are so strongly coupled that the state of the entire application can be determined by looking at the stack backtrace.
+
+Decoupling what from when can dramaticaly improve both the throughput and structures of an application. From a structural point of view the application looks like many litle collaborating computers rather than one big main loop.
+
+### Concurrency Defense Principles
+
+- Keep your concurrency-related code separate from other code.
+
+- Take data encapsulation to heart; severely limit the acess of any data that may be share.
+
+- Attempt to partition data into independent subsets than can be operated on by independent threads, possible in different procesors.
+
+- Avoid using more than one method on a shared object.
+
+- Keep your synchronized sections as small as possible.
+
+- Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don't ingore a failure just because the test pass on a subsequent run.
+
+- Make your thread-based code especially pluggable so that you can run it in varios configurations.
