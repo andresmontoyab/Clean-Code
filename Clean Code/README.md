@@ -2,8 +2,12 @@
 
 In this repository is going to be summmary of the book `Clean Code by Robert C. Martin`, I really hope that this information help you to improve your programming skills.
 
-* [Chapter 1 - Clean Code](#Chapter-1--Clean-Code)
-* [Chapter 2 - Meaninful Names](#Chapter-1--Clean-Code)
+* [Chapter 1 - Clean Code](#Chapter-1---Clean-Code)
+* [Chapter 2 - Meaninful Names](#Chapter-2---Meaningful-Names)
+* [Chapter 3 - Functions](#Chapter-3---Functions)
+* [Chapter 4 - Comments](#Chapter-4---Comments)
+* [Chapter 5 - Formating](#Chapter-5---Formating)
+
 
 ## Chapter 1 - Clean Code
 
@@ -140,3 +144,5 @@ Classes and objects should have noun or noun phrase names like Customer or Accou
 - Concepts that are closely related should be kept vertically close to each other.
 
 - If one function call another, they should be vertically close, and the caller should be above the callee. If at all posible. This gives the program a natural flow.
+
+- Regarding Horizontal formatting, How wide should a line be? I used to follow the rule that you should never have to scroll to the right.
