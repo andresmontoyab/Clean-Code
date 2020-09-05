@@ -112,3 +112,31 @@ Classes and objects should have noun or noun phrase names like Customer or Accou
 - Duplication may be the root of all evil in software. Many principles and practices have been created for the purpose of controlling or eliminating.
 
 ## Chapter 4 - Comments
+
+`Dont Comment Bad code`
+
+- The proper use of comments is to compensate for our failure to express ourself in code. Note that I used the word failure. I meant it. Comments are always failures.
+
+- Inaccurate comments are far worse than no comments at all. They delude and mislead. They set expectations that will never be fulfilled.
+
+- Truth can only be found in one place: The code. Only the code can truly tell you what it does.
+
+- Clear and expressive code with fre comments is far superior to cluttered and complex code with lots of comments.
+
+- Sometimes our corporate coding standars force us to write certain comments for legal reason.
+
+- If you're writing a public API, then you should certainly write good javadocs for it. But keep in mind the rest of the advice in this chapter. Javadocs can be just as misleading, nonlocal, and dishonest as any other kind of comment.
+
+- Dont use comment when you can use a function or a variable.
+
+- Short functions dont need much description. A well-chosen name for a small function that does one thing is usually better than a comment header.
+
+## Chapter 5 - Formating
+
+- You should choose a set of simple rules that govern the format of your code, and then you should consistently apply those rules. If you're working on a team, then the team should agree to a single set of formatting rules and all members should comply.
+
+- It appears to be posible to build significant systems out of files that are typically 200 lines long, with an upper limit of 500. Although this should not be a hard and fast rule, it should be considered very desirable. Small files are usually easier to understand than large files are.
+
+- Concepts that are closely related should be kept vertically close to each other.
+
+- If one function call another, they should be vertically close, and the caller should be above the callee. If at all posible. This gives the program a natural flow.
