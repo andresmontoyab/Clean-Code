@@ -2,9 +2,7 @@
 
 In this repository is going to be summmary of the book `Clean Code by Robert C. Martin`, I really hope that this information help you to improve your programming skills.
 
-<div style="font-size:10px, padding-left:20%, padding-right:20%,  text-align: center;">
-    <h1>`Refactoring or cleaning up our code is a lot like solving a Rubik's cube. There are lots of little steps required to achieve a large goal. Each step enables the next.`<h1>
-</div>
+`Refactoring or cleaning up our code is a lot like solving a Rubik's cube. There are lots of little steps required to achieve a large goal. Each step enables the next.`
 
 * [Chapter 1 - Clean Code](#Chapter-1---Clean-Code)
 * [Chapter 2 - Meaninful Names](#Chapter-2---Meaningful-Names)
@@ -15,7 +13,11 @@ In this repository is going to be summmary of the book `Clean Code by Robert C. 
 * [Chapter 7 - Error Handling](#Chapter-7---Error-Handling)
 * [Chapter 8 - Boundaries](#Chapter-8---Boundaries)
 * [Chapter 9 - Unit Test](#Chapter-9---Unit-Test)
-* [Chapter 10 - Classes](#-Chapter-10---Classes)
+* [Chapter 10 - Classes](#Chapter-10---Classes)
+* [Chapter 11 - Systems](#Chapter-11---Systems)
+* [Chapter 12 - Emergence](#Chapter-12---Emergence)
+* [Chapter 13 - Concurrency](#Chapter-13---Concurrency)
+* [Smells and Heuristics](#Smells-and-Heuristics)
 
 
 ## Chapter 1 - Clean Code
@@ -315,3 +317,51 @@ Decoupling what from when can dramaticaly improve both the throughput and struct
 - Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don't ingore a failure just because the test pass on a subsequent run.
 
 - Make your thread-based code especially pluggable so that you can run it in varios configurations.
+
+## Smells and Heuristics
+
+- Innapropriate Information
+
+- Obsolote Comment
+
+- Redundant Comment
+
+- Poorly Written Comment
+
+- Commented-Out Code
+
+    `When you see commented-out code, delete it! Dont worry, the source control system still remembers it.`
+
+- Build requires more than one step
+
+- Test requires more than one step
+
+- Too Many Arguments
+
+- Flag Arguments
+
+- Dead functions
+
+- Multiple Languages in one source file
+
+- Duplication
+
+- Code at wrong level of abstraction
+
+- Base classes depending on their derivates.
+
+- Too much information
+
+- Dead Code
+
+    ` Dead code is code that isn't executed`
+
+- Vertifical Separation
+
+    ` Variables and function should be defined close tow ehere they are used.`
+
+- Inconsistency
+
+    ` If you do something a certain way, do all similar thing in the same way`
+
+- Artificial COupling
