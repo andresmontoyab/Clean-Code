@@ -7,6 +7,11 @@ In this repository is going to be summmary of the book `Clean Code by Robert C. 
 * [Chapter 3 - Functions](#Chapter-3---Functions)
 * [Chapter 4 - Comments](#Chapter-4---Comments)
 * [Chapter 5 - Formating](#Chapter-5---Formating)
+* [Chapter 6 - Objects and Data Structures](#Chapter-6---Objects-and-Data-Structures)
+* [Chapter 7 - Error Handling](#Chapte-7---Error-Handling)
+* [Chapter 8 - Boundaries](#Chapter-8---Boundaries)
+* [Chapter 9 - Unit Test](#Chapter-9---Unit-Test)
+* [Chapter 10 - Classes](#-Chapter-10---Classes)
 
 
 ## Chapter 1 - Clean Code
@@ -146,3 +151,99 @@ Classes and objects should have noun or noun phrase names like Customer or Accou
 - If one function call another, they should be vertically close, and the caller should be above the callee. If at all posible. This gives the program a natural flow.
 
 - Regarding Horizontal formatting, How wide should a line be? I used to follow the rule that you should never have to scroll to the right.
+
+## Chapter 6 - Objects and Data Structures.
+
+- There is a reason that we keep our variables private. We don't want anyone else to depend on them.
+
+- Hiding implementations is not just a matter of putting a layer of functions between the variables. Hiding implementation is about abstractions! A class does not simply push its variables out through getter and setter. Rather it exposes abstract interfaces that allow the user to manipulate the essence of the data, without having to know its implementation.
+
+- Objects hide their data behind abstractions and expose functions that operate on that data. Data Structures expose their data and have no meaningful functions.
+
+## Chapter 7 - Error Handling
+
+- Things can go wrong and when they do, we as programmers are responsible for making sure that our code does what it needs to do.
+
+- Error handling is important, but if it obscures the logic, it's wrong.
+
+- Use exceptions rather than return codes.
+
+- Use Unchecked exceptions, the price of checked exceptions is an Open/Closed Principle violation. If you throw a checked exceptions from a method in your code and the catch is three levels above, you must declare that expcetion in the signature of each method between you and the catch. This means that a change at a low level of the software can force signature changes on many higher levels. Also Encapsulation is broken because all the functions in the path of a throw must know about detail of that low-level exceptions.
+
+- Each Exception that you throw should provide enough context to determine the source and location of an error.
+
+- Dont Return null, when we are returning null, we are essentially creating work for ourselves and foisting problems upon our callers. All it takes is one missing null check to send an application spinning out of control.
+
+- Dont pass null, returning null from methods is bad, but passing null into methods is worse. You should avoid passing null whenever possible.
+
+## Chapter 8 - Boundaries
+
+- We seldom controll all the software in our system. Sometimes we buy third party packages or use open source.
+
+- Learning a third party code is hard. Integrating the third party code is hard too. Doing both at the same time is doubly hard.
+
+- A good approach to undersntad third party is write some tests to explore our understanding of the third party code. Those test are known as `learning test`.
+
+- In learning test we call the third party API, as we expect to use it in our application. We're essentially doing controlled experiments that check our understanding of that API.
+
+- Learning tests are better than free, we had anyway to learn the API, and writting those tests was an easy and isolated way to get that knowledge.
+
+## Chapter 9 - Unit Test 
+
+Nowadays I would write a test that made sure that every nook and cranny of that code worked as I expected it to.
+
+- Without a test suite they lost the ability to make sure that changes to their code base worked as expected. Without a test suite they could not ensure that changes to one part of their system did not break other parts of their system.
+
+- Test code is just as important as production code. It is not a second-class citizen. It requires thought, design, and care. It must be kept as clean as production code.
+
+- Is is unit test that keep our code flexible, maintainable, and reusable. The reason is simple, if you have test, you do not fear making changes to the code! Without test every change is a possible bug
+
+### The Three Laws of TDD
+
+1. *First Law*: You may not write production code until you have written a failing unit test.
+
+2. *Second Law*: You may not write more of a unit test that is sufficiente to fail, and not compiling is failing
+
+3. *Third Law*: You may not write more production code than is sufficient to pass the currently failing test.
+
+### Keeping Tests Clean
+
+- Having dirty test is equivalent to, if not worse than having no test. The problem is that test must change as the production code evolves. The dirtier the test, the harder they are to change.
+
+- What makes a clean test? Three things. Readability, readability and readability. What makes a test readable? The same thing that makes the code readable: clarity, simplicity, and density of expression
+
+- Single Assert Per Test
+
+- Single Concept per test, we dont want long test functions that go testing one miscellaneous thing after another.
+
+### F.I.R.S.T
+
+Clean test follow five other rules.
+
+ - *Fast*: Test should be fast. They should run quickly. When tests run slow, you wont want to run them frequently. If you don't run them frequently, you wont find problems early enough to fix them easily.
+
+ - *Independent*: Test should not depend on each other. One test should not set up the conditions for the next test. You should be able to run each test independently and run the tests in any order you like.
+
+ - *Repeatable*: Test should be repeatable in any environment, you should be able to run the test in the production environment, in qa environment and on your laptop while riding home on the train without network.
+
+ - *Self-Validating*: Test should have a boolean output. Either they pass or fail. You should not have to read though a log file to tell wheter the tests pass.
+
+ - *Timely*: The test need to be written in a timely fashion. Unit tests should be written just before the production code that makes them pass. If you write tests after the production code , then you may find the production code to be hard to test.
+
+ ## Chapter 10 - Classes
+
+ - Classes should be smmal, the first rule of classes is that they should be small. The second rule of classes is that they should be smaller than that.
+
+ - With function we measured size by counting physical lines. Which classes we use a different measure. We count responsability
+
+ - The Single Responsability principle states that a class or module should have one, and only one, reason to change. This principle gives us both a definition of responsability, and a guideline for class size. Classes should have one responsability-one reason to change
+
+ - We want our system to be composed of many small classes , not a few large ones. Each small classes encapsulates a single responsibility, has a single reason to change, and collaborates with a few others to achieve the desired system.
+
+ ### Cohesion
+
+ - Classes should have a small number of instance variables. Each of the methods of a class should manipulate one or more of those variables. In general the more variables a method manipulated the more cohesive that method is to its class. A class in which each variable is used by each method is maximally cohesive.
+
+ - We would like cohesion to be hight, when cohesion is high, it means that the methods and variables of the class are co-dependent and hang together as a whole.
+
+ - When classes lose cohesion, split them.
