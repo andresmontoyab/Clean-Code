@@ -2,7 +2,7 @@
 
 In this repository is going to be summmary of the book `Clean Code by Robert C. Martin`, I really hope that this information help you to improve your programming skills.
 
-<div style="font-size:10px, padding-left:10%, padding-right:10%, inline: center">
+<div style="font-size:10px, padding-left:20%, padding-right:20%,  text-align: center;">
     <h1>`Refactoring or cleaning up our code is a lot like solving a Rubik's cube. There are lots of little steps required to achieve a large goal. Each step enables the next.`<h1>
 </div>
 
