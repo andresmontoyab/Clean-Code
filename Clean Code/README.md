@@ -50,7 +50,7 @@ In this repository is going to be summmary of the book `Clean Code by Robert C. 
 
 - Humans are good at words. A significant part of our brains is dedicated to the concept of words. And words are, by definition pronounceable.
 
-### Use Searchabñe Names
+### Use Searchable Names
 
 - Single-letter names and numeric constants have a particular problem in that they are not easy to locate across a body text. One might easily grep for MAX_CLASSES_PER_STUDENT, but the number 7 could be more troublesome.
 
