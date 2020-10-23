@@ -36,7 +36,7 @@ In this repository is going to be summmary of the book `Clean Code by Robert C. 
 
 ### Boy Scout Rule
 
-`Leave the campground cleaner than you founf it.`
+`Leave the campground cleaner than you found it.`
 
 ## Chapter 2 - Meaningful Names
 
