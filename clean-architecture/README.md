@@ -1,4 +1,4 @@
-# Clean Code
+# Clean Architecture
 
 In this repository is going to be summmary of the book `Clean Code by Robert C. Martin`, I really hope that this information help you to improve your programming skills.
 
