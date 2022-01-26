@@ -30,6 +30,13 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
             * [Breaking The Cycle](#Breaking-The-Cycle)
         * [The Stable Dependencies Principle](#The-Stable-Dependencies-Principle)
         * [The Stable Abstractions Principle](#The-Stable-Abstractions-Principle)
+* [Architecture](#Architecture)
+    * [What is Architecture?](#What-is-architecture?)
+        * [Development](#Development)
+        * [Deployment](#Deployment)
+        * [Maintenance](#Maintenance)
+        * [Keeping Options Open](#Keeping-Options-Open)
+    * [Independence](#Independence)
         
         
 
@@ -302,3 +309,93 @@ The stable abstractions principle sets up a relationship between stability and a
 Thus, if a component is to be stable, it should consist of interfaces and abstract classes so that it can be extended. Stable components that are extensible are flexible and do not overly constrain the architecture.
 
 ``` Dependencies run in the direction of abstraction ```
+
+# Architecture
+
+## What is Architecture?
+
+First of all, a software architect is a programmer: and continues to be a programmer. Never fall for the lie that suggest that software architects pull back from code to focus on high-level issues. They do not! Software architects are the best programmers, and they continue to take programming tasks, while they also guide the rest of the team toward a design that maximizes productivity. Software architects may not write as much code as other programmers do, but they continue engage in programming tass. They do this because they can not do their jobs properly if they are not experiencing the problems that they are creating for the rest of the programming.
+
+The architecture of a software system is the shape given to that system by those who build it. The form of that shape is in the division of that system into components, the arrangement of those components, and the ways in which those components communicate with each other.
+
+The purpose of that shape is to facilitate tge development, deployment, operation and maintenance of the software system contained within it.
+
+``` The strategy behind that facilitation is to leave as many options open as possible, for as long as possible ```
+
+The primary purpose of architecture is to support the life cycle of the system. Good architecture makes the system easy to understand, easy to develop, easy to mantain and easy to deploy. The ultimate goal is to minimize the lifetime cost of the system and to maximize programmer productivity.
+
+### Development
+
+A software system that is hard to develop is not likely to have a long and healthy lifetime. So the architecture of a system should make that system easy to develop, for the team who develop it.
+
+### Deployment
+
+To be effective , a software system must be deployable. the higher the cost of deployment, the less usefull the system is. A goal of a software architecture, then, should be to make a system that can be easily deployed with a single action.
+
+### Maintenance
+
+Of all the aspects of a software system, maintenance is the most costly. The never-ending parade of new features and the inevitable trail of defects and corrections consume vast amounts of human resources
+
+
+### Keeping Options Open
+
+Software was invented because we needed a way to quickly and easily change the behavior of machines.
+
+The way you keep software soft is to leave as many options open as possible, for as long as possible. What are the options that we need to leave open? `They are the details that don matter`
+
+All software systems  can be decomposed into two major elements: policy and details. The policy element embodies all the businessrules and procedures. The policy is where the true value of the system lives.
+
+The details are those thing that are necessary to enable humans, other systems, and programmers to communicate with the policy, but that do not impact the behavior of the policy at all. They include I/O Device, databases, web systems, servers, frameworks, communication protocols and so forth.
+
+The goal of the architect is to create a shape for the system that recognizes policy as the most essential elememnt of the system while making the details irrelevant to that policy.
+
+If you can develop the high-level policy without committing to the details that surround it , you can delay and defer decisions about those details for a long time. And the longer you wait to make those decision, the more information you have with which to make them properly.
+
+This also leaves you the option to try different experiments. If you have a portion of the high-level policy working, and it is agnostic about the database, you could try connecting it to several different databases to check applicability and performance.
+
+``` A good architect maximizes the number of decisions not made. ```
+
+## Independence
+
+As we previously stated, a good architecture must support.
+
+- The use cases and operation of the system.
+- The Maintenance of the system.
+- The Development of the system.
+- The Deployment of the system
+
+### Use Cases
+
+The first bullet - use cases- means that the architecture of the system must support the intent of the system. If the system is a shopping cart application, then the architecture must support shopping cart use cases.
+
+The most important thing a good architecture can do to support behavior is to clarify and expose that behavior so that the intent of the system is visible at the architectural level.
+
+### Development
+
+Architecture plays a significant role in supporting the development environment. This is where Conways Law comes into plays: Conways law says:
+
+``` Any organization that designs a system will produce a design whose structure is a copy of the organizations communication structure ```
+
+### Deployment
+
+The architecture also plays a huge role in determining the ease with which the system is deployed. A good architecture helps the system to be inmmediately deployable after build.
+
+Again, this is achieved through the proper partitioning and isolation of the components of the system, including those master components that tie the whole system together and ensure that each component is properly started, integrated, and supervised.
+
+### Decoupling Modes
+
+There are many ways to decouple layers and use cases. They can be decoupled at the source code level, at the binary code level and at the execution code level.
+
+- `Source level`: We can control the dependencies between source code modules so that changes to one module do not force changes or recompilation of others.
+
+- `Deployment Level`: We can control the dependencies between deployable units such as jar files.
+
+- `Service Level`: We can reduce the dependencies down to the level of data structure.
+
+What is the best mode to use?
+
+One solution is to simply decouple at the service level by default.
+
+My preference is to push the decoupling to the point where aservice could be formed. Should it become neccesary: but then to leave the components in the same address space as long as possible. This leaves the option for a service open.
+
+A good architecture will allow a system to be born as a monolith, deployed in a single file, but then to grow into a set of independently deployable units, and then all the way to independent services and/or microservices.
