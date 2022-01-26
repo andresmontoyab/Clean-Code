@@ -25,6 +25,14 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
         * [The Common Closure Principle](#The-Common-Closure-Principle)
         * [The Common Reuse Principle](#The-Common-Reuse-Principle)
         * [Tension Diagram ](#Tension-Diagram)
+    * [Component Coupling](#Component-Coupling)
+        * [The Acyclic Dependencies Principle](#The-Acyclic-Dependencies-Principle)
+            * [Breaking The Cycle](#Breaking-The-Cycle)
+        * [The Stable Dependencies Principle](#The-Stable-Dependencies-Principle)
+        * [The Stable Abstractions Principle](#The-Stable-Abstractions-Principle)
+        
+        
+
     
 
 # Introduction
@@ -246,3 +254,51 @@ You may have already realized that the three cohesion principles tend to fight e
 ![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/tension_diagram.jpeg) 
 
 A good architect finds a position in that tension triangle that meets the current concerns of the development team, but is also aware that those concerns will change over time .
+
+## Component Coupling
+
+The next three principles deal with the relaionship between components.
+
+### The Acyclic Dependencies Principle
+
+``` Allow no cycles in the component dependency graph ```
+
+When there are cycles in the dependency graph, it can be very difficult to work out the order in which you must build the components. Indeed, there probably is not correct order.
+
+#### Breaking The Cycle
+
+It is always possible to break a cycle of components and reinstate the dependency graph as a `direct acyclic graph`. There are two primary mechanism for doing so:
+
+1. Apply the Dependency Inversion Principle (DIP)
+2. Create a new component that both components depend on.
+
+
+We dont want components that change frequently and for capricious reason to affect components that otherwise ought to be stable.
+
+Consequently, the component dependency graph is created and molded by architects to protect stable high-value components from volatile components.
+
+### The Stable Dependencies Principle
+
+``` Depend in the direction of stability ```
+
+Designs cannot be completely static. Some volatility is necessary if the design is to be maintained. By conforming to the CCP we create components that are sensitive to certain kinds of change but inmune to others. Some of these components are designed to be volatile. We expect them to change.
+
+Any component that we expect to be volatile should not be depended on by a component that is difficult to change. Otherwise, the volatile component will also be difficult to change.
+
+It is the perversity of software that a module that you have designed to be easy to change can be made difficult to change by someone else whosimply hangs a dependency on it. Not a line of source code in your module need change, yet your module will suddenly become more challenging to change. By conforming to `The Stable Dependencies Principle`, we ensure that modules that are intended to be easy to change are not depended on by modules that are harder to change.
+
+``` Stability is related to the amount of work required to make a change ```
+
+One sure way to make a software component difficult to change, is to make lots of other software components depend on it. A component with lots of incoming dependencies is very stable because it requires a great deal of work to reconcile any changes with all the dependent components.
+
+If all the components in a system were maximally stable, the system would be unchangeable. This is not a desirable situation. Indeed, we want to desing our component structure so that some components are unstable and some are stable.
+
+### The Stable Abstractions Principle
+
+``` A component should be as abstract as it is stable ```
+
+The stable abstractions principle sets up a relationship between stability and abstractness. On the one hand, it says that a stable component should also be abstract so that its stability does not prevent it from being extended. On the other hand, it says that an unstable component should be concrete since its instability allows the concrete code within it to be easily changed.
+
+Thus, if a component is to be stable, it should consist of interfaces and abstract classes so that it can be extended. Stable components that are extensible are flexible and do not overly constrain the architecture.
+
+``` Dependencies run in the direction of abstraction ```
