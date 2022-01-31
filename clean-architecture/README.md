@@ -37,6 +37,11 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
         * [Maintenance](#Maintenance)
         * [Keeping Options Open](#Keeping-Options-Open)
     * [Independence](#Independence)
+    * [Boundaries](#Boundaries)
+    * [Policy And Level](#Policy-And-Level)
+    * [Business Rules](#Business-Rules)
+        * [Entities](#Entities)
+        * [Business Use Case](#Business-Use-Case)
         
         
 
@@ -399,3 +404,65 @@ One solution is to simply decouple at the service level by default.
 My preference is to push the decoupling to the point where aservice could be formed. Should it become neccesary: but then to leave the components in the same address space as long as possible. This leaves the option for a service open.
 
 A good architecture will allow a system to be born as a monolith, deployed in a single file, but then to grow into a set of independently deployable units, and then all the way to independent services and/or microservices.
+
+## Boundaries
+
+software architecture is the art of drawing lines that I call boundaries. Those boundaries separate software elements from one another, and restrict those on one side from knowing about those on the other.
+
+### Which lines do you draw, and when do you draw them?
+
+You draw lines between thing that matter and things that do not. The GUI does not matter to the business rules, so there should be a line between them. The database does not matter to the GUI, so there should be a line between them. The database does not matter to the business rules, so there should be a line between them.
+
+Some of you may have rejected one or more of those statements, especially the part about the business rules not caring about the database. Many of us have been taught to believe that the database is inextricable connected to the business rules. Some of us have even been conviced that the database is the embodiment of the business rules.
+
+The database is a tool that the business rules can use inderectly. The business rules do not need to know about the schema, or the query language, or any of the other details about the database. All the business rules need to know is that there is a set of functions that canbe used to fetch or save data. This allows us to put the database behind an interface.
+
+The core business rules are kept separate from, and independent of those components that are either optional or that can be implemented in many different forms.
+
+Boundaries are drawn where there is an axis of change. The components on oneside of the boundary change at different rates and for different reasons, than the component on the other side of the boundary.
+
+This is the Single Responsibility principle again. The SRP tell us where to draw the lines.
+
+You should recognize this as an application of the Dependency Inversion Principle and Stable Abstraction Principle. Dependency arrow are arranged to point from lower-level details to higher level abstractions
+
+## Policy And Level
+
+Software system are statements of policy. Indeed, at its core, that's all a computer programm actually is. A computer program is a detailed description of the policy by which inputs are transformed into outputs.
+
+Policies that change for the same reasons and at the same times, are at the same level and belong together in the same component. Policies that change for different reasons or at different times, are at different levels and should be separated into different components.
+
+### Level
+
+A strict definition of `level` is `the distance from the inputs and outputs`. The farther a policy is from both the input and output of the system, the higher its level. The policies that maange the input and output are the lowest-level policies in the system.
+
+Keeping these policies separate, with all sources code dependencies pointing in the direction of the higher-level policies, reduces the impact of change. Trivial but urgen changes at the lower levels of the system have little or no impact on the higher, more important, levels.
+
+## Business Rules
+
+Business Rules are rules or procedures that make or save the business money.
+
+We shall call these rules `Critical Business Rules` because they are critical to the business itself, and would exist even if there were not system to automate them.
+
+`Critical Business Rules` usually require some data to work with. We shall call this data `Critical Business Data`. This is the data that would exist even if the system were not automate.
+
+The `Critical Rules` and `Critical Data` are inextricably bound, so they are a good candidate for and object. We will call this kind of object an `Entity`.
+
+### Entities
+
+An `Entity` is an object within our computer system that embodies a small set of `Critical business rules` operating on `Critical business Data`. The `Entity` object either contains the `Critical Business Data` or has very easy access to that data. The interface of the `Entity` consists of the functions that implement the critical business rules that operate on that data.
+
+``` The Entity is pure business and nothing else```
+
+### Business Use Case
+
+Not all business rules are as pure as `Entities`. Some business rules make or save money for the business by defining and constraining the way that an `automated` system operates. These rules would not be used in a manual environment, because they make sense only as part of an automated system.
+
+A `Use Case` is a description of the way that an automated system is used. It specifies the input to be provided by the user, the output to be returned to the user, and the processing steps involved in producing that output. A use case describes application-specific business rules as opposed to the Critical Business Rules within the entity.
+
+```Use cases contains rules that specify how and when the Critical Business Rules within the Entities are invoked. Use cases control the dance of the Entities```
+
+High-level concepts, such as Entities, know nothing of the lower-level concepts, such as use cases. Instead the lower level use cases know about the higher-level Entities.
+
+The `Use Case` class accepts simple request data structures for its input, and return simple response data structure as its output. These data structure are not dependent on anything. They do not derive from standard framework interfaces such as `HttpRequest` and `HttpResponse`. They know nothing of the web, nor do they share any of trapping of whatever user interface might be place.
+
+You might be tempted to have these data structures contain references to Entity objects. You might think this makes sense because the Entities and the request/response models share so much data. Avoid this temptation! The purpose of these two objects is very different. OVer time they will change for very different reasons, so trying them together in any way violates the Commom Closure and Single Responsibility Principle. The result would be lots of tramp data, and lots of conditionals in your code.
