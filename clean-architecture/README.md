@@ -42,9 +42,11 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
     * [Business Rules](#Business-Rules)
         * [Entities](#Entities)
         * [Business Use Case](#Business-Use-Case)
-        
-        
-
+    * [Screaming Architecture](#Screaming-Architecture)
+    * [The Clean Architecture](#The-Clean-Architecture)
+    * [Partial Boundaries](#Partial-Boundaries)
+    * [Layers and Boundaries](#Layers-and-Boundaries)
+    * [The Main Components](#The-Main-Components)
     
 
 # Introduction
@@ -466,3 +468,83 @@ High-level concepts, such as Entities, know nothing of the lower-level concepts,
 The `Use Case` class accepts simple request data structures for its input, and return simple response data structure as its output. These data structure are not dependent on anything. They do not derive from standard framework interfaces such as `HttpRequest` and `HttpResponse`. They know nothing of the web, nor do they share any of trapping of whatever user interface might be place.
 
 You might be tempted to have these data structures contain references to Entity objects. You might think this makes sense because the Entities and the request/response models share so much data. Avoid this temptation! The purpose of these two objects is very different. OVer time they will change for very different reasons, so trying them together in any way violates the Commom Closure and Single Responsibility Principle. The result would be lots of tramp data, and lots of conditionals in your code.
+
+## Screaming Architecture
+
+Just as the plans for a house or a library screams about the use cases of those buildings, so should the architecture of a software application scream about the use cases of the application.
+
+A good software architecture allows decisions about frameworks, databases, web servers, and other environmental issues and tools to be deferred and delayed.
+
+A good architecture emphasizes the use cases and decouples them from peripheral concers.
+
+Your architecture should tell readers about the system, not about the framework you used in your system.
+
+## The Clean Architecture
+
+Over the last several decades we have seen a whole range of ideas regarding the architecture of systems.
+
+
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/clean-architecture.jpeg) 
+
+Although these architectures all vary somewhat in their details, they are very similar. They have the same objective, which is the separation of concerns.
+
+Each of these architectures produces systems that have the following characteristics.
+
+1. Independent of frameworks
+2. Testable
+3. Independent of the UI
+4. Independent of the database
+5. Independent of any external agency.
+
+### The Dependency Rule
+
+``` Source code dependencies must point only inwards, toward higher-level policies ```
+
+Nothing in an inner circle can know anything at all about something in an outer circle. In particular, the name of something declared in an outer circle must not be mentioned by the code in an inner circle. That includes functions, classes, variables, or any other software entity.
+
+### Entities
+
+Entities encapsulate enterprise wide `Critical Business Rules. An Entity can be an object with methods, or it can be a set of data structures and functions. It does not matter so long as the entities can be used by many different applications in the enterprise.
+
+### Use Cases
+
+The Software in the use cases layer contains `application-specific` business rules. It encapsulates and implements all of the use cases of the system. These use cases orchestrate the flow of data to and from the entities, and direct those entities to use their `Critical Business Rules` to achieve the goals of the use case.
+
+### Interface Adapters
+
+The software in the interface layer is a set of adapters that convert data from the format most convenient for the use cases and entities, to the format most convinient for some external agency such as the database or the web.
+
+
+### Frameworks and Drivers
+
+The framework and drivers in this layer is where all the details go. The web is a detail. The database is a detail. We keep these things on the outside where they can do little harm.
+
+## Partial Boundaries
+
+In Many situations, a good architect might judge that the expense of such a boundary is too high, but might still want to hold a place for such a boundary in case it is needed later.
+
+This kind of anticipatory design is often frowned upon by many in the Agile community as a violation of `YAGNI: You aren't going to need it`. Architects however, sometimes look at the problem and think, " Yeah, but I might", in that case they may implemenet a partial boundary.
+
+One way to construct a partial boundary is to do all the work necessary to create independently compilable and deployable components, and then simply keep them together in the same component.
+
+It is one of the functions of an architect to decide where an architectural boundary might one day exist, and wheter to fully or partially implement that boundary.
+
+## Layers and Boundaries
+
+As Software architect, you must see the future. You must guess--intelligently. You must weight the costs and determine where the architectural boundaries lie, and which should be fully implemented, and which should be partially implemented, and which should be ignored.
+
+But this is not a one time decision. You do not simply decide at the start of the project which boundaries to implement and which to ignore. Rather, you `watch`. You pay attention as the system evolves. You note where boundaries may be required, and then carefully watch for the first inkling of friction because those boundaries does not exist.
+
+At that point, you weigh the cost of implementing those boundaries versus the cost of ignoring them--and you review that decision frequently. Your goal is to implement the boundaries right at the inflection point where the cost of implementing becomes less than the cost of ignoring.
+
+It takes a watchful eye.
+
+## The Main Components
+
+In every system, there is at least one component that creates, coordinates and oversees the others. I call this component `Main`
+
+The `Main` component is the ultimate detail--the lowest level policy. It is the inital entry point of the system. Nothing, other than the operating system, depends on it. Its job is to create all the factories, strategies, and other global facilities, and then hand control over to the high-level abstract portions of the system.
+
+The point is that `Main` is a dirty low-level module in the outermost circle of the clean architecture. It loads everything up for the high-level system, and then hands control over to it.
+
+Think of `Main` as a plugin to the application-- a plugin that sets up the initial conditions and configuration, gathers all the outside resources, and then hands control over to the high-level policy of the application. Since it is a plugin, it is possible to have many `Main` components, for each configuration of your application.
