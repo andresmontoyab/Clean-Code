@@ -47,6 +47,11 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
     * [Partial Boundaries](#Partial-Boundaries)
     * [Layers and Boundaries](#Layers-and-Boundaries)
     * [The Main Components](#The-Main-Components)
+    * [The Test Boundary](#The-Test-Boundary)
+* [Details](#Details)
+    * [The Database Is A Detail](#The-Database-Is-A-Detail)
+    * [The Web Is A Detail](#The-Web-Is-A-Detail)
+    * [Frameworks Are Details](#Frameworks-Are-Details)
     
 
 # Introduction
@@ -548,3 +553,89 @@ The `Main` component is the ultimate detail--the lowest level policy. It is the 
 The point is that `Main` is a dirty low-level module in the outermost circle of the clean architecture. It loads everything up for the high-level system, and then hands control over to it.
 
 Think of `Main` as a plugin to the application-- a plugin that sets up the initial conditions and configuration, gathers all the outside resources, and then hands control over to the high-level policy of the application. Since it is a plugin, it is possible to have many `Main` components, for each configuration of your application.
+
+## The Test Boundary
+
+Yes, that's right: The test are part of the system, and they participate in the architecture just like every other of the system does.
+
+Test by their nature, follow the dependency rule; They are very detailed and concrete; and they always depend inward toward the code beign tested. In fact, you can think of the tests as the outermost circle in the architecture. Nothing within the system depends on the tests, and the tests always depend inward on the components of the system. 
+
+### Design for testability
+
+Test that are not well integrated into the design of the system tend to be fragile, and they make the system rigid and difficult to change.
+
+The issue, of course, is coupling. Test that are strongly coupled to the system must change along with the system. Even the most trivial change to a system component can cause many coupled tests to breakor require changes.
+
+Changes to common system components can cause hundreds or even thousands of tests to break. this is known as the `Fragile Tests Problem`
+
+The solution is to design for tesability. The first rule of software design wheter for testability or for any other reason is always the same: `Don't depend on volatile things`. GUI are volatile. Test suites that operate the system through the GUI must be fragile. Therefore design the system and the test so that business rules can be tested without using the GUI.
+
+### Testing API.
+
+The way to accomplish this goal is to create a specific API that the test can use to verify all the business rules.
+
+### Structural Coupling
+
+Image a test suite that has a test class for every production class, and a set of tets methods for every production method. Such a test suite is deeply coupled to the structure of the application.
+
+When one of those production methods or classes changes, a large number of tests must be change as well. Consequently the test are fragile and they make the production code rigid.
+
+The role of the testing API is to hide the structure of the application from the tests. This allows the production code to be refactored and evolved in ways that don't affect the tests. It also allows the tests to be refactored adn evolved in ways that do not affect the production code.
+
+Tests are not outside the system; rather, they are parts of the system that must be well desgined if they are to provide the desired benefits of stability and regresion. Tests that are not desgined as part of the system tend to be fragile and difficult to maintain.
+
+## Details
+
+### The Database Is A Detail
+
+From an architectural point of view, the database is a non-entity, it is a detail that does not rise to the level of an architecture element.
+
+The database is a utility that provides access to the data. From the architecture's point of view, that utility is irreleant because it's a low-level detail, a mechanism. And a good architect does not allow low-level mechanism to pollute the system architecture.
+
+Many data access framework allows database rows and tables to be passed around the system as objects. Allowing this is an architectural error. It couples the use cases, business rules, and in some cases even the UI to the relational structure of the data.
+
+This reality is why I say the database is a detail. It's just a mechanism we use to move the data back and forth between the surface of the disk and RAM. The database is really nothing more than a big bucket of bits where we store our data on a long-terms basis. But we seldom use the data in that form.
+
+Thus, from an architectural view point, we should not care about the form that the data takes while it is on the surface of a rotating magnetic disk. Indeed, we should not acknowledge that disk exist at all.
+
+The organizational structure of data, the data model, is architecturally significant. The technologies and system that move data on and off a rotating magnetic surface are not. Relational databases system that force the data to be organized into tables and accessed with SQL have much more to do with the latter than with former. The data is significant. The database is a detail.
+
+### The Web Is A Detail
+
+Do you remember how we looked at our old client-server architectures with disdain in the face of the shiny new technology of the web?
+
+Actually the web didn't change anything. Or, at least, it shouldn't have. The web is just the lattest in a series of oscillations that our industry has gone through since the 1960s. These oscillations move back and forth between putting all the computer power in central servers and putting all the computer power out at the terminals.
+
+Of course, it would be incorrect to think that those oscillations started with the web. Before the web, there was client-server architecture. Before that, there were central minicomputers with arrays of dumbs terminals. Before that, there were mainframes with smart green-screen terminals. Before that, there were computer rooms and punched cards.
+
+And so the story goes. We can't seem to figure out where we want the computer power. We go back and forth between centralizing it and distributing it. And, I Imagine those oscillations will continue for some time to come.
+
+As architect, though, we have to look at the long term. Those oscillations are just short-term issues that we want to push away from the central core of our business rules.
+
+The GUI os a detail. The Web is a GUI. So the web is a detail. And as an architect you want to put details like that behind boundaries that keep them separate from your core business logic.
+
+### Frameworks Are Details
+
+Frameworks have become quite popular. Generally speaking, this is a good thing. There are many frameworks out there that are free, powerful and useful.
+
+However, frameworks are not architectures, though some try to be.
+
+Framework authors know their own problems, and the problems of their coworkers and friends. And they write their frameworks to solve those problems, not yours.
+
+You must make a huge commitment to the framework, but the framework author makes no commitment to you whatsoever.
+
+```What are the risk?```
+
+1. The Architecture of a framework is often not very clean. Frameworks tend to violate the Dependency rule. They asked you to inherit your code into your business objects, your Entities.
+
+2. The framework may evolve in a direction that you don't find helpful. You may be stuck upgrading to new versions that don't help you.
+
+3. A new and better framework may come along that you wish you could swicht to.
+
+```What is the solutuon?```
+
+```Don't marry the framework```
+
+Oh, you can use the framework, just don't couple to it. Keep it at arm's length. Treat framework as a detail that belong in one of the outer circles of the architecture.
+
+Don't let frameworks into your core code. Instead, integrate them into components that plug in to your core code, following the dependency rule.
