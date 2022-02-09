@@ -52,7 +52,11 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
     * [The Database Is A Detail](#The-Database-Is-A-Detail)
     * [The Web Is A Detail](#The-Web-Is-A-Detail)
     * [Frameworks Are Details](#Frameworks-Are-Details)
-    
+* [The Missing Chapter](#The-Missing-Chapter)
+    * [Package By Layer](#Package-By-Layer)
+    * [Package By Feature](#Package-By-Feature)
+    * [Ports And Adapters](#Ports-And-Adapters)
+    * [Package By Component](#Package-By-Component)
 
 # Introduction
 
@@ -639,3 +643,24 @@ You must make a huge commitment to the framework, but the framework author makes
 Oh, you can use the framework, just don't couple to it. Keep it at arm's length. Treat framework as a detail that belong in one of the outer circles of the architecture.
 
 Don't let frameworks into your core code. Instead, integrate them into components that plug in to your core code, following the dependency rule.
+
+## The Missing Chapter
+
+All of the advice you've read so far will certainly help you design better software, composed of classes and components with well-defined boundaries, clear responsabilities, and controlled dependencie. But it turns out that the devil is in the implementations
+
+### Package By Layer
+
+sdfasdf
+
+### Package By Feature
+
+assdaf
+
+### Ports And Adapters
+
+asfsadf
+
+### Package By Component
+
+fdgsdfgsd
+
