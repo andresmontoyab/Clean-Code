@@ -57,6 +57,8 @@ In this repository is going to be summmary of the book `Clean Architecture by Ro
     * [Package By Feature](#Package-By-Feature)
     * [Ports And Adapters](#Ports-And-Adapters)
     * [Package By Component](#Package-By-Component)
+    * [Organization Versus Encapsulation](#Organization-Versus-Encapsulation)
+* [The Missing Advice](#The-Missing-Advice)
 
 # Introduction
 
@@ -650,17 +652,46 @@ All of the advice you've read so far will certainly help you design better softw
 
 ### Package By Layer
 
-sdfasdf
+The first, and perhaps simplest, design approach is the traditional horizontal layered architecture, where we separete our code based on what it does from a technical perspective.
+
+In this typical layered architecture, we have one layer for the web code, one layer for our `business logic` and one layer for the persistance.
+
+In `Presentation Domain Data Layering` Martin Fowler says that adopting such a layered architecture is a good way to get started. Its a very quick way to get something up and running without a huge amount of complexity. The problem, as Martin points out, is that once your software grows in scale and complexity, you will quickly find that having three large buckets of code isn't sufficient, and you will need to think about modularizing further.
+
+Another problem is that, as Uncle Bob has already said, a layered architecture doesn't scream anything about the business domain.
 
 ### Package By Feature
 
-assdaf
+Another option for organizing your code is to adopt a `package by feature` style. This is a vertical slicing, based on related features, domain concepts, or aggregate roots.
+
+This is a very simple refactoring from the `package by layer` style, but the top-level organization of the code now screams something about the business domain. We can now see that this code base has something to do with orders rather than the web, service and repositories.
+
+
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_layer.png) 
 
 ### Ports And Adapters
 
-asfsadf
+As Uncle Bob has said, approaches such as `ports and adapters`, `the hexagonal architecture`, `boundaries, controllers, entities` and so on aim to create architectures where business/domain-focused code is independent and separate from the technical implementation details such as framework and databases. To summarize, you can often see such code bases beign composed of an `inside` (domain) and an `outside` (infrastructure).
+
+
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/domain_infra.png) 
+
+The `inside` region contains all of the domain concepts, whereas the `outside` regions contains the interactions with the outside worls. The major rule here is that the `outside` depends on the `inside`- never the other way around.
+
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/ports_and_adapters.png) 
+
 
 ### Package By Component
 
-fdgsdfgsd
+It's hybrid approach to everything we've seen so far, with the goal of bundling all of the responsibilities related to a single coarsed-grained component into a single Java package. It's about taking a service-centric view of a software system, which is something we're seeing with micro-services architecture as well
 
+
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_component.png) 
+
+### Organization Versus Encapsulation
+
+Looking at this issue another way, if you make all types in your java application `public`, the packages are simple an organization mechanism, rather that being used for encapsulation. In other words if you make all your classes accesible to each other it does not matter which architecture you use.
+
+# The Missing Advice
+
+The whole point of this chapter is to highlight that your best design intentions can be destroyed in a flash if you dont consider the intricacies of the implementation strategy. Think about how to map your desired design on to code structures, how to organize that code, which decoupling modes to apply during runtime and compile-time. Leave options open where applicable, but be pragmatic, and take into consideration the size of your team, their skill level, and the complexity of the solution in conjunction with your time and budgetary constraints. Also think about using your compiler to help you enforce your chosen architectural style, and watch out for coupling in other areas, such as data models. The devil is in the implementation details.
