@@ -660,13 +660,15 @@ In `Presentation Domain Data Layering` Martin Fowler says that adopting such a l
 
 Another problem is that, as Uncle Bob has already said, a layered architecture doesn't scream anything about the business domain.
 
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_layer.png) 
+
 ### Package By Feature
 
 Another option for organizing your code is to adopt a `package by feature` style. This is a vertical slicing, based on related features, domain concepts, or aggregate roots.
 
 This is a very simple refactoring from the `package by layer` style, but the top-level organization of the code now screams something about the business domain. We can now see that this code base has something to do with orders rather than the web, service and repositories.
 
-![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_layer.png) 
+![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_feature.png) 
 
 ### Ports And Adapters
 
