@@ -666,13 +666,11 @@ Another option for organizing your code is to adopt a `package by feature` style
 
 This is a very simple refactoring from the `package by layer` style, but the top-level organization of the code now screams something about the business domain. We can now see that this code base has something to do with orders rather than the web, service and repositories.
 
-
 ![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_layer.png) 
 
 ### Ports And Adapters
 
 As Uncle Bob has said, approaches such as `ports and adapters`, `the hexagonal architecture`, `boundaries, controllers, entities` and so on aim to create architectures where business/domain-focused code is independent and separate from the technical implementation details such as framework and databases. To summarize, you can often see such code bases beign composed of an `inside` (domain) and an `outside` (infrastructure).
-
 
 ![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/domain_infra.png) 
 
@@ -680,11 +678,9 @@ The `inside` region contains all of the domain concepts, whereas the `outside` r
 
 ![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/ports_and_adapters.png) 
 
-
 ### Package By Component
 
 It's hybrid approach to everything we've seen so far, with the goal of bundling all of the responsibilities related to a single coarsed-grained component into a single Java package. It's about taking a service-centric view of a software system, which is something we're seeing with micro-services architecture as well
-
 
 ![](https://github.com/andresmontoyab/Clean-Code/blob/master/resources/package_by_component.png) 
 
